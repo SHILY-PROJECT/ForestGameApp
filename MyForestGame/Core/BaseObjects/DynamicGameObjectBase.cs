@@ -1,30 +1,53 @@
-﻿using Game.Core.Models;
-using Game.Core.Interfaces;
+﻿using MyForestGame.Core.Models;
+using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.Interfaces;
 
-namespace Game.Core.BaseObjects
+namespace MyForestGame.Core.BaseObjects
 {
-    public class DynamicGameObjectBase : GameObjectBase
+    public abstract class DynamicGameObjectBase : GameObjectBase, IMoveController
     {
-        public IMovementModule Move { get; set; }
+        public IMovementModule MovementModule { get; set; }
+        public ICollisionHandler CollisionHandler { get; set; }
         public PositionModel PastPosition { get; set; }
 
-        public DynamicGameObjectBase(PositionModel currentPosition)
+        public DynamicGameObjectBase(IMovementModule movementModule, PositionModel position)
         {
-            CurrentPosition = new(currentPosition);
-            PastPosition = new(currentPosition);
+            MovementModule = movementModule;
+
+            CurrentPosition = new PositionModel(position.Width, position.Height);
+            PastPosition = new PositionModel(position.Width, position.Height);
         }
 
-        public void SetMoveModule(MovementModule movementModule)
-            => Move = movementModule;
+        public void SetMoveModule(IMovementModule movementModule)
+            => MovementModule = movementModule;
 
         public bool CurrentAndPastPositionIsEqual
             => CurrentPosition.Width == PastPosition.Width && CurrentPosition.Height == PastPosition.Height;
 
         public void SetPastPosition(int width, int hight)
-            => PastPosition = new(width, hight);
+        {
+            if (PastPosition != null)
+            {
+                PastPosition.Width = width;
+                PastPosition.Height = hight;
+            }
+            else PastPosition = new PositionModel(width, hight);
+        }
 
         public void SetPastPosition(PositionModel position)
             => SetPastPosition(position.Width, position.Height);
 
+        public void MoveUp()
+            => MovementModule.Up(this);
+
+        public void MoveDown()
+            => MovementModule.Down(this);
+
+        public void MoveRight()
+            => MovementModule.Right(this);
+
+        public void MoveLeft()
+            => MovementModule.Left(this);
+        
     }
 }

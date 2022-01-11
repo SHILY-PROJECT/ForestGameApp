@@ -1,10 +1,10 @@
 ﻿using System;
-using Game.Core.Interfaces;
-using Game.Core.Models;
+using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.Models;
 
-namespace Game.Core.BaseObjects
+namespace MyForestGame.Core.BaseObjects
 {
-    public class GameObjectBase : IGameObject
+    public abstract class GameObjectBase : IGameObject
     {
         public string Name { get; set; }
         public string Model { get; set; }

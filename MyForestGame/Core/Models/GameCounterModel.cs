@@ -1,4 +1,4 @@
-﻿namespace Game.Core.Models
+﻿namespace MyForestGame.Core.Models
 {
     public class GameCounterModel
     {

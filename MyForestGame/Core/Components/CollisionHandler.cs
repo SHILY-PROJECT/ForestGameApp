@@ -2,61 +2,59 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Game.Core.Models;
-using Game.Core.Interfaces;
-using Game.Core.GameObjects;
+using MyForestGame.Core.Models;
+using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.GameObjects;
+using MyForestGame.Core.Interfaces;
 
-namespace Game.Core.BaseObjects
+namespace MyForestGame.Core.BaseObjects
 {
-    public class CollisionHandler
+    public class CollisionHandler : ICollisionHandler
     {
-        private IGameManager GameManager { get; set; }
-        private DynamicGameObjectBase DynamicGameObject { get; init; }
-
-        private List<GameObjectBase> GameObjectsСollection { get => GameManager.GameObjectsСollection; }
+        private IGameManager GameManager { get; }       
         private GameCounterModel GameCounter { get => GameManager.GameCounter; }
+        private List<IGameObject> ObjСollection { get => GameManager.GameObjectsСollection; }
 
         /// <summary>
         /// Конструктор обработчика столкновений.
         /// </summary>
         /// <param name="manager"></param>
         /// <param name="dynamicGameObject"></param>
-        public CollisionHandler(IGameManager manager, DynamicGameObjectBase dynamicGameObject)
+        public CollisionHandler(IGameManager manager)
         {
             GameManager = manager;
-            DynamicGameObject = dynamicGameObject;
         }
 
         /// <summary>
         /// Проверка столкновения.
         /// </summary>
         /// <returns>True - столкновение с объектом; иначе - False.</returns>
-        public bool IsCollision(int width, int hight)
+        public bool IsCollision(DynamicGameObjectBase dynamicObj, int newWidthPosition, int newHightPosition)
         {
-            if (DynamicGameObject is EnemyObject enemyObj)
+            if (dynamicObj is EnemyObject enemyObj)
             {
-                if (GameObjectsСollection.FirstOrDefault(x => x is PlayerObject && x.IsCurrentPosition(width, hight)) is PlayerObject)
+                if (ObjСollection.FirstOrDefault(x => x is PlayerObject && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is PlayerObject)
                 {
                     GameEnd(false);
                 }
-                else if (GameObjectsСollection.FirstOrDefault(x => !ReferenceEquals(x, DynamicGameObject) && x.IsCurrentPosition(width, hight)) is not null)
+                else if (ObjСollection.FirstOrDefault(x => !ReferenceEquals(x, dynamicObj) && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is not null)
                 {
                     return true;
                 }
             }
-            else if (DynamicGameObject is PlayerObject playerObj)
+            else if (dynamicObj is PlayerObject playerObj)
             {
-                if (GameObjectsСollection.FirstOrDefault(x => x is EnemyObject && x.IsCurrentPosition(width, hight)) is EnemyObject)
+                if (ObjСollection.FirstOrDefault(x => x is EnemyObject && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is EnemyObject)
                 {
                     GameEnd(false);
                 }
-                else if (GameObjectsСollection.FirstOrDefault(x => x is PointObject && x.IsCurrentPosition(width, hight)) is PointObject obj)
+                else if (ObjСollection.FirstOrDefault(x => x is PointObject && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is PointObject obj)
                 {
                     GameCounter.PointsCounter += obj.Points;
                     if (GameCounter.PointsIsEqual) GameEnd(true);
                     obj.IsVisible = false;
                 }
-                else if (GameObjectsСollection.FirstOrDefault(x => x is ObstacleObject && x.IsCurrentPosition(width, hight)) is ObstacleObject)
+                else if (ObjСollection.FirstOrDefault(x => x is ObstacleObject && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is ObstacleObject)
                 {
                     return true;
                 }

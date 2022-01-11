@@ -1,4 +1,4 @@
-﻿namespace Game.Core.Interfaces
+﻿namespace MyForestGame.Core.Interfaces
 {
     public interface IRenderEngine
     {

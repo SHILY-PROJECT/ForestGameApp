@@ -1,7 +1,7 @@
 ﻿using System;
-using Game.Core.Interfaces;
+using MyForestGame.Core.Interfaces;
 
-namespace Game.Core.Engines.WorldEngineScripts
+namespace MyForestGame.Core.Engines.WorldEngineScripts
 {
     internal class EnemyBehaviorHandler
     {
@@ -18,19 +18,19 @@ namespace Game.Core.Engines.WorldEngineScripts
             switch (Rnd.Next(4))
             {
                 case 0:
-                    enemy.Move.Up();
+                    enemy.MoveUp();
                     break;
 
                 case 1:
-                    enemy.Move.Down();
+                    enemy.MoveDown();
                     break;
 
                 case 2:
-                    enemy.Move.Left();
+                    enemy.MoveLeft();
                     break;
 
                 case 3:
-                    enemy.Move.Right();
+                    enemy.MoveRight();
                     break;
 
                 default: throw new Exception();

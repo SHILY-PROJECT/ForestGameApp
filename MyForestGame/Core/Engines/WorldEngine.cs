@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using Game.Core.Models;
-using Game.Core.Interfaces;
-using Game.Core.BaseObjects;
-using Game.Core.GameObjects;
-using Game.Core.Engines.WorldEngineScripts;
+using MyForestGame.Core.Models;
+using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.BaseObjects;
+using MyForestGame.Core.GameObjects;
+using MyForestGame.Core.Engines.WorldEngineScripts;
 
-namespace Game.Core.Engines
+namespace MyForestGame.Core.Engines
 {
     public class WorldEngine : IWorldEngine
     {
@@ -17,7 +17,7 @@ namespace Game.Core.Engines
 
         private GameGridSizeModel GridSize { get => GameManager.GridSize; }
         private PlayerObject Player { get => GameManager.Player; }
-        private List<GameObjectBase> GameObjectsСollection { get => GameManager.GameObjectsСollection; set => GameManager.GameObjectsСollection = value; }
+        private List<IGameObject> GameObjectsСollection { get => GameManager.GameObjectsСollection; set => GameManager.GameObjectsСollection = value; }
         private GameObjectsSettingsModel GameObjectsSettings { get => GameManager.GameObjectsSettings; set => GameManager.GameObjectsSettings = value; }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Game.Core.Engines
             GameManager = manager;
             GameManager.GameCounter = new();
             GameManager.GameObjectsСollection = new();
-            GameManager.GameObjectsSettings = new GameObjectsSettingsModel()
+            GameManager.GameObjectsSettings = new()
             {
                 PercentageOfPoints = Rnd.Next(6, 8),
                 PercentageOfEnemies = Rnd.Next(3, 5),
@@ -83,10 +83,7 @@ namespace Game.Core.Engines
         /// Добавление объекта 'Игрок' в общую коллекцию игровых объектов.
         /// </summary>
         private void AddGameObject(PlayerObject obj)
-        {
-            SetMoveModuleForDynamicGameObject(obj);
-            GameObjectsСollection.Add(obj);
-        }
+            => GameObjectsСollection.Add(obj);
 
         /// <summary>
         /// Добавление игровых объектов в общую коллекицю игровых объектов.
@@ -99,25 +96,15 @@ namespace Game.Core.Engines
 
                 GameObjectBase obj = typeGameObject switch
                 {
-                    Type type when type == typeof(EnemyObject) => new EnemyObject(listFreePositions[indexPosition]),
+                    Type type when type == typeof(EnemyObject) => new EnemyObject(new MovementModule(GameManager.CollisionHandler, GridSize), listFreePositions[indexPosition]),
                     Type type when type == typeof(PointObject) => new PointObject(listFreePositions[indexPosition]),
                     Type type when type == typeof(ObstacleObject) => new ObstacleObject(listFreePositions[indexPosition]),
                     _ => throw new Exception($"{typeGameObject.GetType().Name} - Invalid game object")
                 };
 
-                SetMoveModuleForDynamicGameObject(obj);
                 listFreePositions.RemoveAt(indexPosition);
                 GameObjectsСollection.Add(obj);
             }
-        }
-
-        /// <summary>
-        /// Установка модуля движения динамическим объектам.
-        /// </summary>
-        private void SetMoveModuleForDynamicGameObject(GameObjectBase obj)
-        {
-            if (obj is DynamicGameObjectBase dynamicObj)
-                dynamicObj.SetMoveModule(new MovementModule(GameManager, dynamicObj));
         }
 
         /// <summary>

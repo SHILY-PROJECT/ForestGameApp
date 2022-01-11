@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Core.BaseObjects
+namespace MyForestGame.Core.BaseObjects
 {
     public class GameGridSizeModel
     {

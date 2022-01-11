@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Core.Models;
-using Game.Core.Interfaces;
-using Game.Core.BaseObjects;
+using MyForestGame.Core.Models;
+using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.BaseObjects;
 
-namespace Game.Core.GameObjects
+namespace MyForestGame.Core.GameObjects
 {
     public class EnemyObject : DynamicGameObjectBase, IEnemyObject
     {
@@ -12,7 +12,8 @@ namespace Game.Core.GameObjects
         public TimeSpan LastStep { get; set; } = TimeSpan.FromSeconds(IGameManager.CurrentTime);
         public bool IsTimeToTakeStep => CalculateTimeForStep();
 
-        public EnemyObject(PositionModel currentPosition) : base(currentPosition)
+        public EnemyObject(IMovementModule movementModule, PositionModel currentPosition) :
+            base(movementModule, currentPosition)
         {
             var objects = new List<(string name, string model, int stepSpeed, ConsoleColor colorObject, ConsoleColor colorBackground)>
             {

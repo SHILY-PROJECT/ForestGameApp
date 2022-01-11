@@ -1,7 +1,7 @@
 ﻿using System;
-using Game.Core.Models;
+using MyForestGame.Core.Models;
 
-namespace Game.Core.Interfaces
+namespace MyForestGame.Core.Interfaces
 {
     public interface IGameObject
     {
@@ -34,5 +34,13 @@ namespace Game.Core.Interfaces
         /// Видимость объекта.
         /// </summary>
         bool IsVisible { get; set; }
+
+        void SetCurrentPosition(int width, int hight);
+
+        void SetCurrentPosition(PositionModel position);
+
+        bool IsCurrentPosition(int width, int hight);
+
+        bool IsCurrentPosition(PositionModel position);
     }
 }

@@ -1,58 +1,60 @@
-﻿using Game.Core.Models;
-using Game.Core.Interfaces;
+﻿using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.Interfaces;
 
-namespace Game.Core.BaseObjects
+namespace MyForestGame.Core.BaseObjects
 {
     public class MovementModule : IMovementModule
     {
-        private IGameManager GameManager { get; set; }
-        private DynamicGameObjectBase DynamicGameObject { get; init; }
-        private CollisionHandler CollisionHandler { get; set; }
+        private ICollisionHandler CollisionHandler { get; set; }
+        private GameGridSizeModel GridSize { get; set; }
 
-        private GameGridSizeModel GridSize { get => GameManager.GridSize; }
-        private PositionModel CurrentPosition { get => DynamicGameObject.CurrentPosition; }
-
-        public MovementModule(IGameManager manager, DynamicGameObjectBase obj)
+        public MovementModule(ICollisionHandler collisionHandler, GameGridSizeModel gridSize)
         {
-            GameManager = manager;
-            DynamicGameObject = obj;
-            DynamicGameObject.PastPosition = new(CurrentPosition);
-            CollisionHandler = new(manager, DynamicGameObject);
+            CollisionHandler = collisionHandler;
+            GridSize = gridSize;
         }
 
-        public void Up()
+        public void Up(DynamicGameObjectBase dynamicObj)
         {
-            if (CurrentPosition.Height < GridSize.Height && CurrentPosition.Height > 0 &&
-                CollisionHandler.IsCollision(CurrentPosition.Width, CurrentPosition.Height - 1) is false)
+            var currentPosition = dynamicObj.CurrentPosition;
+
+            if (currentPosition.Height < GridSize.Height && currentPosition.Height > 0 &&
+                CollisionHandler.IsCollision(dynamicObj, currentPosition.Width, currentPosition.Height - 1) is false)
             {
-                CurrentPosition.Height -= 1;
+                currentPosition.Height -= 1;
             }
         }
 
-        public void Down()
+        public void Down(DynamicGameObjectBase dynamicObj)
         {
-            if (CurrentPosition.Height < (GridSize.Height - 1) &&
-                CollisionHandler.IsCollision(CurrentPosition.Width, CurrentPosition.Height + 1) is false)
+            var currentPosition = dynamicObj.CurrentPosition;
+
+            if (currentPosition.Height < (GridSize.Height - 1) &&
+                CollisionHandler.IsCollision(dynamicObj, currentPosition.Width, currentPosition.Height + 1) is false)
             {
-                CurrentPosition.Height += 1;
+                currentPosition.Height += 1;
             }
         }
 
-        public void Right()
+        public void Right(DynamicGameObjectBase dynamicObj)
         {
-            if (CurrentPosition.Width < (GridSize.Width - 1) &&
-                CollisionHandler.IsCollision(CurrentPosition.Width + 1, CurrentPosition.Height) is false)
+            var currentPosition = dynamicObj.CurrentPosition;
+
+            if (currentPosition.Width < (GridSize.Width - 1) &&
+                CollisionHandler.IsCollision(dynamicObj, currentPosition.Width + 1, currentPosition.Height) is false)
             {
-                CurrentPosition.Width += 1;
+                currentPosition.Width += 1;
             }
         }
 
-        public void Left()
+        public void Left(DynamicGameObjectBase dynamicObj)
         {
-            if (CurrentPosition.Width < GridSize.Width && CurrentPosition.Width > 0 &&
-                CollisionHandler.IsCollision(CurrentPosition.Width - 1, CurrentPosition.Height) is false)
+            var currentPosition = dynamicObj.CurrentPosition;
+
+            if (currentPosition.Width < GridSize.Width && currentPosition.Width > 0 &&
+                CollisionHandler.IsCollision(dynamicObj, currentPosition.Width - 1, currentPosition.Height) is false)
             {
-                CurrentPosition.Width -= 1;
+                currentPosition.Width -= 1;
             }
         }
     }

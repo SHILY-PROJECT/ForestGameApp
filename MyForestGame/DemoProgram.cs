@@ -1,4 +1,4 @@
-﻿using Game.Core.BaseObjects;
+﻿using MyForestGame.Core.BaseObjects;
 using MyForestGame.Core;
 
 namespace MyForestGame

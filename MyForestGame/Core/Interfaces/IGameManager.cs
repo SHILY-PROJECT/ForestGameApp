@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Core.Models;
-using Game.Core.BaseObjects;
-using Game.Core.GameObjects;
+using MyForestGame.Core.Models;
+using MyForestGame.Core.BaseObjects;
+using MyForestGame.Core.GameObjects;
+using MyForestGame.Core.Interfaces;
 
-namespace Game.Core.Interfaces
+namespace MyForestGame.Core.Interfaces
 {
     public interface IGameManager
     {
@@ -19,6 +20,11 @@ namespace Game.Core.Interfaces
         IRenderEngine RenderEngine { get; init; }
 
         /// <summary>
+        /// Обработчик столкновений.
+        /// </summary>
+        ICollisionHandler CollisionHandler { get; init; }
+
+        /// <summary>
         /// Игровой счетчик (очки, уровни).
         /// </summary>
         GameCounterModel GameCounter { get; set; }
@@ -31,7 +37,7 @@ namespace Game.Core.Interfaces
         /// <summary>
         /// Коллекция всех игровых объектов (динамические и статические объекты).
         /// </summary>
-        List<GameObjectBase> GameObjectsСollection { get; set; }
+        List<IGameObject> GameObjectsСollection { get; set; }
 
         /// <summary>
         /// Настройки объектов мира (количество объектов на карте в процентах).

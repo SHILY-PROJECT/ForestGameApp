@@ -1,10 +1,10 @@
-﻿using System;
+﻿using MyForestGame.Core.BaseObjects;
+using System;
 
-namespace Game.Core.Interfaces
+namespace MyForestGame.Core.Interfaces
 {
-    public interface IEnemyObject
+    public interface IEnemyObject : IMoveController
     {
-        IMovementModule Move { get; set; }
         bool IsTimeToTakeStep { get; }
         int StepSpeedInMilliseconds { get; set; }
         TimeSpan LastStep { get; set; }

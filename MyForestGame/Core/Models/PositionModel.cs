@@ -1,4 +1,4 @@
-﻿namespace Game.Core.Models
+﻿namespace MyForestGame.Core.Models
 {
     public class PositionModel
     {
@@ -9,10 +9,10 @@
 
         public PositionModel(PositionModel position) : this(position.Width, position.Height) { }
 
-        public PositionModel(int width, int height)
+        public PositionModel(int widthPosition, int heightPosition)
         {         
-            Width = width;
-            Height = height;
+            Width = widthPosition;
+            Height = heightPosition;
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Text;
 using System.Linq;
-using Game.Core.BaseObjects;
-using Game.Core.Interfaces;
-using Game.Core.Models;
+using MyForestGame.Core.BaseObjects;
+using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.Models;
 
-namespace Game.Core.Engines
+namespace MyForestGame.Core.Engines
 {
     public class RenderEngine : IRenderEngine
     {

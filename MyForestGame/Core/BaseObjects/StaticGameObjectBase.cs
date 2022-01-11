@@ -1,12 +1,16 @@
-﻿using Game.Core.Models;
+﻿using MyForestGame.Core.Models;
 
-namespace Game.Core.BaseObjects
+namespace MyForestGame.Core.BaseObjects
 {
-    public class StaticGameObjectBase : GameObjectBase
+    public abstract class StaticGameObjectBase : GameObjectBase
     {
         public StaticGameObjectBase(PositionModel currentPosition)
         {
-            CurrentPosition = new(currentPosition);
+            CurrentPosition = new PositionModel
+            {
+                Width = currentPosition.Width,
+                Height = currentPosition.Height
+            };
         }
     }
 }

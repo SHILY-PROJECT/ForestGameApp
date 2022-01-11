@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Core.BaseObjects;
-using Game.Core.Models;
+using MyForestGame.Core.BaseObjects;
+using MyForestGame.Core.Models;
 
-namespace Game.Core.GameObjects
+namespace MyForestGame.Core.GameObjects
 {
     public class ObstacleObject : StaticGameObjectBase
     {
