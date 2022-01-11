@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using Game.Core.Interfaces;
+using MyForestGame.Core.Interfaces;
 
 namespace MyForestGame.Core
 {
@@ -57,20 +57,31 @@ namespace MyForestGame.Core
         {
             while (true)
             {
-                var key = Console.ReadKey(true).Key;
-
                 if (GameManager.IsGameOver) return;
 
-                if (key == ConsoleKey.W || key == ConsoleKey.UpArrow) GameManager.Player.Move.Up();
-                if (key == ConsoleKey.S || key == ConsoleKey.DownArrow) GameManager.Player.Move.Down();
-                if (key == ConsoleKey.A || key == ConsoleKey.LeftArrow) GameManager.Player.Move.Left();
-                if (key == ConsoleKey.D || key == ConsoleKey.RightArrow) GameManager.Player.Move.Right();
-
-                if (key == ConsoleKey.Escape)
+                switch (Console.ReadKey(true).Key)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Game exited");
-                    Environment.Exit(0);
+                    case ConsoleKey.W or ConsoleKey.UpArrow:
+                        GameManager.Player.MoveUp();
+                        break;
+
+                    case ConsoleKey.S or ConsoleKey.DownArrow:
+                        GameManager.Player.MoveDown();
+                        break;
+
+                    case ConsoleKey.A or ConsoleKey.LeftArrow:
+                        GameManager.Player.MoveLeft();
+                        break;
+
+                    case ConsoleKey.D or ConsoleKey.RightArrow:
+                        GameManager.Player.MoveRight();
+                        break;
+
+                    case ConsoleKey.Escape:
+                        Console.Clear();
+                        Console.WriteLine("Game exited");
+                        Environment.Exit(0);
+                        break;
                 }
             }
         }
