@@ -27,8 +27,8 @@ namespace MyForestGame.Core
             RenderEngine.RenderAllGameObjects();
 
             Parallel.Invoke(
-                () => { UpdatableHandlerPlayerControl(); },
-                () => { UpdatableViewWorld(); });
+                () => UpdatableHandlerPlayerControl(),
+                () => UpdatableViewWorld());
         }
 
         /// <summary>
