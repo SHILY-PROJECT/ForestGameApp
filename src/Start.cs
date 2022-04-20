@@ -3,7 +3,7 @@ using MyForestGame.Core;
 
 namespace MyForestGame
 {
-    internal class DemoProgram
+    internal class Start
     {
         internal static void Main()
             => new MainGame(new GameManager()).Start();
