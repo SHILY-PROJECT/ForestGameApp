@@ -1,14 +1,15 @@
 ﻿using System;
 using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.Interfaces.Services;
 
 namespace MyForestGame.Core.Engines.WorldEngineScripts
 {
     internal class EnemyBehaviorHandler
     {
-        private IGameManager GameManager { get; set; }
+        private IGameManagerService GameManager { get; set; }
         private Random Rnd { get; set; } = new();
 
-        internal EnemyBehaviorHandler(IGameManager manager)
+        internal EnemyBehaviorHandler(IGameManagerService manager)
         {
             GameManager = manager;
         }
