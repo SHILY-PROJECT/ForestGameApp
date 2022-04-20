@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using MyForestGame.Core.Models;
 using MyForestGame.Core.Interfaces;
 using MyForestGame.Core.GameObjects;
-using MyForestGame.Core.Interfaces;
+using MyForestGame.Core.Interfaces.Services;
 
 namespace MyForestGame.Core.BaseObjects
 {
     public class CollisionHandler : ICollisionHandler
     {
-        private IGameManager GameManager { get; }       
+        private IGameManagerService GameManager { get; }       
         private GameCounterModel GameCounter { get => GameManager.GameCounter; }
         private List<IGameObject> ObjСollection { get => GameManager.GameObjectsСollection; }
 
@@ -20,7 +20,7 @@ namespace MyForestGame.Core.BaseObjects
         /// </summary>
         /// <param name="manager"></param>
         /// <param name="dynamicGameObject"></param>
-        public CollisionHandler(IGameManager manager)
+        public CollisionHandler(IGameManagerService manager)
         {
             GameManager = manager;
         }

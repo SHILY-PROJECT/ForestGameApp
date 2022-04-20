@@ -1,9 +1,8 @@
 ﻿using MyForestGame.Core.BaseObjects;
 
-namespace MyForestGame.Core.Interfaces
+namespace MyForestGame.Core.Interfaces;
+
+public interface ICollisionHandler
 {
-    public interface ICollisionHandler
-    {
-        bool IsCollision(DynamicGameObjectBase dynamicObj, int newWidthPosition, int newHightPosition);
-    }
+    bool IsCollision(DynamicGameObjectBase dynamicObj, int newWidthPosition, int newHightPosition);
 }

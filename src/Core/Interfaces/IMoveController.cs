@@ -1,12 +1,11 @@
-﻿namespace MyForestGame.Core.Interfaces
-{
-    public interface IMoveController
-    {
-        IMovementModule MovementModule { get; set; }
+﻿namespace MyForestGame.Core.Interfaces;
 
-        void MoveUp();
-        void MoveDown();
-        void MoveRight();
-        void MoveLeft();
-    }
+public interface IMoveController
+{
+    IMovementModule MovementModule { get; set; }
+
+    void MoveUp();
+    void MoveDown();
+    void MoveRight();
+    void MoveLeft();
 }

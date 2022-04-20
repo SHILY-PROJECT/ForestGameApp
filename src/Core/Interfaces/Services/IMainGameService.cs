@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.Services;
 
-public interface IPlayerControlService : IService
+public interface IMainGameService
 {
-
+    void Run();
 }

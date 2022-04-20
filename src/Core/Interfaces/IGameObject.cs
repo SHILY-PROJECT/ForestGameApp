@@ -1,46 +1,19 @@
 ﻿using System;
 using MyForestGame.Core.Models;
 
-namespace MyForestGame.Core.Interfaces
+namespace MyForestGame.Core.Interfaces;
+
+public interface IGameObject
 {
-    public interface IGameObject
-    {
-        /// <summary>
-        /// Имя объекта.
-        /// </summary>
-        string Name { get; set; }
+    string Name { get; set; }
+    string Model { get; set; }
+    ConsoleColor ColorBackground { get; set; }
+    ConsoleColor ColorObject { get; set; }
+    PositionModel CurrentPosition { get; set; }
+    bool IsVisible { get; set; }
 
-        /// <summary>
-        /// Визуальная модель объекта.
-        /// </summary>
-        string Model { get; set; }
-
-        /// <summary>
-        /// Цвет объекта (модели).
-        /// </summary>
-        ConsoleColor ColorBackground { get; set; }
-
-        /// <summary>
-        /// Задний фон объекта.
-        /// </summary>
-        ConsoleColor ColorObject { get; set; }
-
-        /// <summary>
-        /// Текущая позиция объекта на игровой сетке.
-        /// </summary>
-        PositionModel CurrentPosition { get; set; }
-
-        /// <summary>
-        /// Видимость объекта.
-        /// </summary>
-        bool IsVisible { get; set; }
-
-        void SetCurrentPosition(int width, int hight);
-
-        void SetCurrentPosition(PositionModel position);
-
-        bool IsCurrentPosition(int width, int hight);
-
-        bool IsCurrentPosition(PositionModel position);
-    }
+    void SetCurrentPosition(int width, int hight);
+    void SetCurrentPosition(PositionModel position);
+    bool IsCurrentPosition(int width, int hight);
+    bool IsCurrentPosition(PositionModel position);
 }
