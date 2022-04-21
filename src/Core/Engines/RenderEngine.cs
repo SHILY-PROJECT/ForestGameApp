@@ -1,44 +1,36 @@
-﻿using System;
-using System.Text;
-using System.Linq;
-using MyForestGame.Core.BaseObjects;
-using MyForestGame.Core.Interfaces;
-using MyForestGame.Core.Models;
-using MyForestGame.Core.Interfaces.Services;
+﻿namespace MyForestGame.Core.Engines;
 
-namespace MyForestGame.Core.Engines;
-
-internal class RenderEngine : IRenderEngineService
+internal class RenderEngine : IRenderEngine
 {
+    private readonly IGameManager _manager;
+
     private int _counterWidth;
     private int _counterHight;
 
     private int _pastNumberLevel = 0;
     private int _pastNumberPoints = 0;
 
-    private IGameManagerService GameManager { get; }
-    private GameGridSizeModel GridSize { get; }
-    private GameCounterModel GameCounter { get; }
-
-    public RenderEngine(IGameManagerService gameManager)
+    public RenderEngine(IGameManager gameManager)
     {
-        GameManager = gameManager;
-        GridSize = GameManager.GridSize;
-        GameCounter = GameManager.GameCounter;
+        _manager = gameManager;
     }
+
+    private IGameGridSize GridSize { get => _manager.GameGridSize; }
+    private IGameCounter GameCounter { get => _manager.GameCounter; }
+    private IList<IGameObject> GameObjects { get => _manager.GameObjectsСollection; }
 
     public void Connect()
     {
         _counterWidth = (GridSize.Width * 4 + 1) - 33;
         _counterHight = (GridSize.Height * 2);
 
-        this.RenderStartMap();
-        this.RenderStartAllGameObjects();
+        RenderStartMap();
+        RenderStartAllGameObjects();
     }
 
     public void UpdateRender()
     {
-        foreach (var obj in GameManager.GameObjectsСollection.Where(obj => obj is DynamicGameObjectBase && obj.IsVisible).Select(x => (DynamicGameObjectBase)x))
+        foreach (var obj in GameObjects.Where(obj => obj is BaseMovableGameObject && obj.IsVisible).Select(x => (BaseMovableGameObject)x))
         {
             if (obj.CurrentAndPastPositionIsEqual is false)
             {
@@ -51,8 +43,12 @@ internal class RenderEngine : IRenderEngineService
 
     private void RenderStartAllGameObjects()
     {
-        GameManager.GameObjectsСollection.ForEach(obj => RenderGameObject(obj));
         RenderPointsCounter();
+
+        for (int index = 0; index < GameObjects.Count; index++)
+        {
+            RenderGameObject(GameObjects[index]);
+        }
     }
 
     private void RenderStartMap()
@@ -106,7 +102,7 @@ internal class RenderEngine : IRenderEngineService
     {
         int left, top;
 
-        if (obj is DynamicGameObjectBase dObj)
+        if (obj is BaseMovableGameObject dObj)
         {
             left = dObj.PastPosition.Width * 4 + 1;
             top = dObj.PastPosition.Height * 2 + 1;
@@ -151,4 +147,5 @@ internal class RenderEngine : IRenderEngineService
             RenderGameObject(GameCounter.CurrentLevel.ToString(), _counterWidth + 26, _counterHight + 1, ConsoleColor.White, default);
         }
     }
+
 }
