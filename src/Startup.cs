@@ -1,15 +1,13 @@
-﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using MyForestGame.Core;
-using MyForestGame.Core.Interfaces.Services;
-
-namespace MyForestGame;
+﻿namespace MyForestGame;
 
 internal class Startup
 {
-    public Startup(IMainGameService mainGameService) => Game = mainGameService;
+    public Startup(IMainGame mainGameService)
+    {
+        Game = mainGameService;
+    }
 
-    private IMainGameService Game { get; set; }
+    private IMainGame Game { get; set; }
 
     private void StartGame() => Game.Run();
 

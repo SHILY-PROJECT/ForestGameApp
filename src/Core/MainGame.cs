@@ -1,10 +1,13 @@
-﻿using MyForestGame.Core.Interfaces.Services;
+﻿namespace MyForestGame.Core;
 
-namespace MyForestGame.Core;
-
-internal class MainGame : IMainGameService
+internal class MainGame : IMainGame
 {
-    private IGlobalGameEngineService GameEngine { get; }
-    public MainGame(IGlobalGameEngineService globalGame) => GameEngine = globalGame;
-    public void Run() => GameEngine.Connect();   
+    private readonly IGlobalGameEngine _gameEngine;
+
+    public MainGame(IGlobalGameEngine globalGame)
+    {
+        _gameEngine = globalGame;
+    }
+
+    public void Run() => _gameEngine.Connect();
 }
