@@ -35,7 +35,7 @@ internal class WorldEngine : IWorldEngine
         }
     }
 
-    public void GenerateWorld()
+    private void GenerateWorld()
     {
         var freePositionsCollection = new List<PositionModel>();
 
