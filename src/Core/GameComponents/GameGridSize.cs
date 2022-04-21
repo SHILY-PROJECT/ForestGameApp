@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.GameComponents;
 
-public class GameGridSize : IGameGridSize
+internal class GameGridSize : IGameGridSize
 {
     public GameGridSize() { }
 

@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.GameComponents.Objs;
 
-public abstract class BaseGameObject : IGameObject
+internal abstract class BaseGameObject : IGameObject
 {
     public string Name { get; set; }
     public string Model { get; set; }

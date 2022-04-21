@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.GameComponents.Objs;
 
-public interface IEnemyGameObject : IMoveController
+internal interface IEnemyGameObject : IMoveController
 {
     bool IsTimeToTakeStep { get; }
     int StepSpeedInMilliseconds { get; set; }

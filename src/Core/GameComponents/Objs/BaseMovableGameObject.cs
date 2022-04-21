@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.GameComponents.Objs;
 
-public abstract class BaseMovableGameObject : BaseGameObject, IMoveController
+internal abstract class BaseMovableGameObject : BaseGameObject, IMoveController
 {
     public BaseMovableGameObject(PositionModel position)
     {

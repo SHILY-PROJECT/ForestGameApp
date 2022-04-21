@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.GameComponents;
 
-public interface ICollisionHandler
+internal interface ICollisionHandler
 {
     bool IsCollision(BaseMovableGameObject dynamicObj, int newWidthPosition, int newHightPosition);
 }

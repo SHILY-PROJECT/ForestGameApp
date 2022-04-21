@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.GameComponents;
 
-public interface IMainGame
+internal interface IMainGame
 {
     void Run();
 }

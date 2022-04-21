@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.GameComponents;
 
-public interface IGameCounter
+internal interface IGameCounter
 {
     int CurrentLevel { get; set; }
     int PointsCounter { get; set; }

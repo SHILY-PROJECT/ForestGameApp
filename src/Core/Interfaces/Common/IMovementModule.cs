@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.Common;
 
-public interface IMovementModule
+internal interface IMovementModule
 {
     void Up(BaseMovableGameObject movableGameObject);
     void Down(BaseMovableGameObject movableGameObject);

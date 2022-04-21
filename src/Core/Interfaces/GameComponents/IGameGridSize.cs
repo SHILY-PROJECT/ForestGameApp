@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.GameComponents;
 
-public interface IGameGridSize
+internal interface IGameGridSize
 {
     int Width { get; }
     int Height { get; }

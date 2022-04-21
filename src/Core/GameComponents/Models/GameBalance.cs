@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.GameComponents.Models;
 
-public class GameBalance : IGameBalance
+internal class GameBalance : IGameBalance
 {
     public int PercentageOfPoints { get; private set; }
     public int PercentageOfObstacle { get; private set; }

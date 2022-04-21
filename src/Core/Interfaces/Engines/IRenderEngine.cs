@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.Engines;
 
-public interface IRenderEngine : IService
+internal interface IRenderEngine : IService
 {
     void UpdateRender();
 }

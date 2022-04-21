@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.Common;
 
-public interface IService
+internal interface IService
 {
     void Connect();
 }

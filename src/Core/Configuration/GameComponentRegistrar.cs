@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Configuration;
 
-public static class GameComponentRegistrar
+internal static class GameComponentRegistrar
 {
     public static IServiceCollection AddGameComponents(this IServiceCollection services)
     {

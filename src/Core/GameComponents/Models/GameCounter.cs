@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.GameComponents.Models;
 
-public class GameCounter : IGameCounter
+internal class GameCounter : IGameCounter
 {
     public int CurrentLevel { get; set; } = 1;
     public int PointsCounter { get; set; } = 0;

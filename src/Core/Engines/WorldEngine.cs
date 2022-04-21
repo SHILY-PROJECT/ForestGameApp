@@ -86,7 +86,6 @@ internal class WorldEngine : IWorldEngine
 
     private int CalculateNumberOfObjects(int percentageOfObjects)
     { 
-        return GridSize.Width* GridSize.Height* percentageOfObjects / 100;
+        return GridSize.Width * GridSize.Height * percentageOfObjects / 100;
     }
-
 }

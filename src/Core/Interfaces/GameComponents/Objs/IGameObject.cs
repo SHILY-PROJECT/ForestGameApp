@@ -1,8 +1,6 @@
-﻿using MyForestGame.Core.GameComponents.Models;
+﻿namespace MyForestGame.Core.Interfaces.GameComponents.Objs;
 
-namespace MyForestGame.Core.Interfaces.GameComponents.Objs;
-
-public interface IGameObject
+internal interface IGameObject
 {
     string Name { get; set; }
     string Model { get; set; }

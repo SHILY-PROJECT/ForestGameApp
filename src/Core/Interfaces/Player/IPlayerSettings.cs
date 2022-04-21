@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.Player;
 
-public interface IPlayerSettings
+internal interface IPlayerSettings
 {
     string Name { get; }
     string DisplayedModel { get; }

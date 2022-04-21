@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.GameComponents;
 
-public interface IGameBalance
+internal interface IGameBalance
 {
     int PercentageOfPoints { get; }
     int PercentageOfObstacle { get; }

@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.Interfaces.Common;
 
-public interface IMoveController
+internal interface IMoveController
 {
     IMovementModule MovementModule { get; set; }
 

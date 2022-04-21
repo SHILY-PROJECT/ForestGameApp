@@ -1,6 +1,6 @@
 ﻿namespace MyForestGame.Core.GameComponents.Models;
 
-public class PositionModel
+internal class PositionModel
 {
     public PositionModel() { }
 
