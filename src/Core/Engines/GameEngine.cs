@@ -1,20 +1,12 @@
-﻿using MyForestGame.Core.Interfaces.Services;
-using System.Threading.Tasks;
+﻿namespace MyForestGame.Core.Engines;
 
-namespace MyForestGame.Core.Engines;
-
-public class GameEngine : IGlobalGameEngineService
+internal class GameEngine : IGlobalGameEngine
 {
-    public IRenderEngineService RenderEngine { get; init;}
-    public IWorldEngineService WorldEngine { get; init; }
-    public IPlayerControlService PlayerControl { get; init; }
-    public IGameManagerService GameManager { get; init; }
-
     public GameEngine(
-        IGameManagerService gameManager,
-        IWorldEngineService worldEngine,
-        IRenderEngineService renderEngine,
-        IPlayerControlService playerControl)
+        IGameManager gameManager,
+        IWorldEngine worldEngine,
+        IRenderEngine renderEngine,
+        IPlayerControl playerControl)
     {
         GameManager = gameManager;
         WorldEngine = worldEngine;
@@ -22,26 +14,33 @@ public class GameEngine : IGlobalGameEngineService
         PlayerControl = playerControl;
     }
 
+    public IRenderEngine RenderEngine { get; init;}
+    public IWorldEngine WorldEngine { get; init; }
+    public IPlayerControl PlayerControl { get; init; }
+    public IGameManager GameManager { get; init; }
+
     public void Connect()
     {
+        WorldEngine.Connect();
         RenderEngine.Connect();
-        PlayerControl.Connect();
-        Parallel.Invoke(() => this.Update());
+
+        Task.WaitAll(new[]
+        {
+            Task.Run(() => UpdateView()),
+            Task.Run(() => PlayerControl.Connect())
+        });
     }
 
-    private void Update()
+    public Task UpdateView()
     {
-        Task.Run(() =>
+        while (true)
         {
-            while (true)
-            {
-                WorldEngine.UpdateStateWorld();
-                RenderEngine.UpdateRender();
+            WorldEngine.UpdateStateWorld();
+            RenderEngine.UpdateRender();
 
-                if (GameManager.IsGameOver) return;
+            if (GameManager.IsGameOver) Task.FromResult(true);
 
-                Task.Delay(10).Wait();
-            }
-        });
+            Task.Delay(10);
+        }
     }
 }
