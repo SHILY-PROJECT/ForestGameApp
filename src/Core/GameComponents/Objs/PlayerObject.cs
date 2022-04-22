@@ -14,6 +14,10 @@ internal class PlayerObject : BaseMovableGameObject
 
     public int Points { get; set; }
 
+    public bool IsCoordinatesInPlayerPositionOrAbout(int width, int height)
+        => (width < CurrentPosition.Width + 2 || width < CurrentPosition.Width - 2) &&
+           (height < CurrentPosition.Height + 2 || height < CurrentPosition.Height - 2);
+
     private void Initialize(IPlayerSettings settings)
     {
         if (settings.Name.All(x => char.IsLetter(x)))
