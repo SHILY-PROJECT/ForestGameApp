@@ -37,52 +37,51 @@ internal class WorldEngine : IWorldEngine
 
     private void GenerateWorld()
     {
-        var freePositionsCollection = new List<PositionModel>();
+        var freePositions = new List<PositionModel>();
 
-        for (int indexHeight = 0; indexHeight < GridSize.Height; indexHeight++)
+        for (int heightIndex = 0; heightIndex < GridSize.Height; heightIndex++)
         {
-            for (int indexWidth = 0; indexWidth < GridSize.Width; indexWidth++)
+            for (int widthIndex = 0; widthIndex < GridSize.Width; widthIndex++)
             {
-                var (pWidth, pHeight) = (Player.CurrentPosition.Width, Player.CurrentPosition.Height);
-
-                if ((indexWidth < pWidth + 2 || indexWidth < pWidth - 2) &&
-                    (indexHeight < pHeight + 2 || indexHeight < pHeight - 2)) continue;
-
-                freePositionsCollection.Add(new(indexWidth, indexHeight));
+                if (!Player.IsCoordinatesInPlayerPositionOrAbout(widthIndex, heightIndex))
+                {
+                    freePositions.Add(new(widthIndex, heightIndex));
+                }
             }
         }
 
         AddGameObject(Player);
-        AddGameObject(typeof(PointObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfPoints), freePositionsCollection);
-        AddGameObject(typeof(EnemyObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfEnemies), freePositionsCollection);
-        AddGameObject(typeof(ObstacleObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfObstacle), freePositionsCollection);
+        AddGameObject(typeof(PointObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfPoints), freePositions);
+        AddGameObject(typeof(EnemyObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfEnemies), freePositions);
+        AddGameObject(typeof(ObstacleObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfObstacle), freePositions);
 
-        GameCounter.VictoryPoints = GameObjects.Sum(x => x is PointObject p ? p.Points : 0);
-    }
-
-    private void AddGameObject(Type typeGameObject, int numberOfObjects, List<PositionModel> listFreePositions)
-    {
-        for (int i = 0; i < numberOfObjects; i++)
-        {
-            var indexPosition = _rnd.Next(listFreePositions.Count);
-
-            BaseGameObject obj = typeGameObject switch
-            {
-                var t when t == typeof(EnemyObject) => new EnemyObject(new MovementModule(GridSize, _manager.CollisionHandler), listFreePositions[indexPosition]),
-                var t when t == typeof(PointObject) => new PointObject(listFreePositions[indexPosition]),
-                var t when t == typeof(ObstacleObject) => new ObstacleObject(listFreePositions[indexPosition]),
-                _ => throw new Exception($"{typeGameObject.GetType().Name} - Invalid game object")
-            };
-
-            listFreePositions.RemoveAt(indexPosition);
-            GameObjects.Add(obj);
-        }
+        GameCounter.VictoryPoints = GameObjects.Sum(go => go is PointObject point ? point.Points : 0);
     }
 
     private void AddGameObject(PlayerObject obj)
     {
         GameObjects.Add(obj);
     }
+
+    private void AddGameObject(Type typeGameObject, int numberOfObjects, IList<PositionModel> listFreePositions)
+    {
+        int rndPositionIndex;
+
+        (GameObjects as List<IGameObject>).AddRange(Enumerable.Range(0, numberOfObjects).Select(o =>
+        {
+            var position = listFreePositions[rndPositionIndex = _rnd.Next(listFreePositions.Count)];
+            listFreePositions.RemoveAt(rndPositionIndex);
+            return CreateGameObject(typeGameObject, position);
+        }));
+    }
+
+    private IGameObject CreateGameObject(Type type, PositionModel position) => type switch
+    {
+        _ when type == typeof(EnemyObject)      => new EnemyObject(new MovementModule(GridSize, _manager.CollisionHandler), position),
+        _ when type == typeof(PointObject)      => new PointObject(position),
+        _ when type == typeof(ObstacleObject)   => new ObstacleObject(position),
+        _                                       => throw new ArgumentException($"Invalid type game object.")
+    };
 
     private int CalculateNumberOfObjects(int percentageOfObjects)
     { 
