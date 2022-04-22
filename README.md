@@ -1,2 +1,7 @@
-## MyForestGame
-<img height="450" align="centr" src="preview.png">
+
+<h2 align="center">
+  MyForestGame
+</h2>
+<p align="center">
+  <img src="preview.png" />
+</p>
