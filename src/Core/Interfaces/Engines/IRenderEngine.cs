@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.Interfaces.Engines;
+﻿namespace ForestGame.Core.Interfaces.Engines;
 
 internal interface IRenderEngine : IService
 {

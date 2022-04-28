@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.Interfaces.Common;
+﻿namespace ForestGame.Core.Interfaces.Common;
 
 internal interface IMovementModule
 {

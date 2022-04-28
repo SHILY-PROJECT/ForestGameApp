@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyForestGame", "src\MyForestGame.csproj", "{AF65B584-6C37-4DC8-9C83-963D95EE9EF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForestGame", "src\ForestGame.csproj", "{AF65B584-6C37-4DC8-9C83-963D95EE9EF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C57D6A49-646E-46AD-A584-CE4A50BAEAD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +20,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AF65B584-6C37-4DC8-9C83-963D95EE9EF7} = {C57D6A49-646E-46AD-A584-CE4A50BAEAD0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6FECBD5F-0E7A-4FFD-B712-A7FBB8FE3110}

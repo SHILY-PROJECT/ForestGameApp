@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core;
+﻿namespace ForestGame.Core;
 
 internal class MainGame : IMainGame
 {

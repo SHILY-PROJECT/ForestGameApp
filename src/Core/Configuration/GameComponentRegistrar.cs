@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.Configuration;
+﻿namespace ForestGame.Core.Configuration;
 
 internal static class GameComponentRegistrar
 {

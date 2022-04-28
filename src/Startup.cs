@@ -1,4 +1,4 @@
-﻿namespace MyForestGame;
+﻿namespace ForestGame;
 
 internal class Startup
 {

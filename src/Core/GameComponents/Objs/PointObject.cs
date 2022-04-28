@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.GameComponents.Objs;
+﻿namespace ForestGame.Core.GameComponents.Objs;
 
 internal class PointObject : BaseImmovableGameObject
 {

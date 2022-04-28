@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.GameComponents;
+﻿namespace ForestGame.Core.GameComponents;
 
 internal class GameManager : IGameManager
 {

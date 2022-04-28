@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.Engines;
+﻿namespace ForestGame.Core.Engines;
 
 internal class WorldEngine : IWorldEngine
 {

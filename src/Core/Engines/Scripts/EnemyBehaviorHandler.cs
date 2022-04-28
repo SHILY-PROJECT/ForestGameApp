@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.Engines.Scripts;
+﻿namespace ForestGame.Core.Engines.Scripts;
 
 internal class EnemyBehaviorHandler
 {

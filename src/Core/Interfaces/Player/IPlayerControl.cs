@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.Interfaces.Player;
+﻿namespace ForestGame.Core.Interfaces.Player;
 
 internal interface IPlayerControl : IService
 {

@@ -1,4 +1,4 @@
-﻿namespace MyForestGame.Core.GameComponents.Models;
+﻿namespace ForestGame.Core.GameComponents.Models;
 
 internal class GameBalance : IGameBalance
 {
