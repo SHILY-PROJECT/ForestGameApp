@@ -2,8 +2,28 @@
 
 internal class WorldEngine : IWorldEngine
 {
+    private static readonly Random _rnd = new();
+
+    private readonly EnemySettings[] _enemies =
+    {
+        new("Wolve", ">-<", ConsoleColor.White, ConsoleColor.DarkRed, _rnd.Next(200, 400)),
+        new("Bear", "<^>", ConsoleColor.White, ConsoleColor.DarkRed, _rnd.Next(400, 600))
+    };
+
+    private readonly ObstacleSettings[] _obstacles =
+    {
+        new("Stone", "   ", ConsoleColor.White, ConsoleColor.DarkMagenta),
+        new("Tree", "   ", ConsoleColor.White, ConsoleColor.DarkMagenta)
+    };
+
+    private readonly PointSettings[] _points =
+    {
+        new("Apples", "-$-", ConsoleColor.White, ConsoleColor.DarkGreen, 1),
+        new("Cherries", "-$-", ConsoleColor.White, ConsoleColor.DarkGreen, 1),
+        new("Bananas", "-$-", ConsoleColor.White, ConsoleColor.DarkGreen, 1)
+    };
+
     private readonly IGameManager _manager;
-    private readonly Random _rnd = new();
 
     public WorldEngine(IGameManager gameManager)
     {
@@ -77,9 +97,9 @@ internal class WorldEngine : IWorldEngine
 
     private IGameObject CreateGameObject(Type type, PositionModel position) => type switch
     {
-        _ when type == typeof(Enemy)      => new Enemy(new MovementModule(GridSize, _manager.CollisionHandler), position),
-        _ when type == typeof(Point)      => new Point(position),
-        _ when type == typeof(Obstacle)   => new Obstacle(position),
+        _ when type == typeof(Enemy)      => new Enemy(_enemies[_rnd.Next(_enemies.Length)] with { StartPosition = position }, new MovementModule(GridSize, _manager.CollisionHandler)),
+        _ when type == typeof(Point)      => new Point(_points[_rnd.Next(_points.Length)] with { StartPosition = position }),
+        _ when type == typeof(Obstacle)   => new Obstacle(_obstacles[_rnd.Next(_obstacles.Length)] with { StartPosition = position }),
         _                                       => throw new ArgumentException($"Invalid type game object.")
     };
 
