@@ -10,6 +10,7 @@ global using ForestGame.Core.Configuration;
 global using ForestGame.Core.Engines.Scripts;
 global using ForestGame.Core.GameComponents;
 global using ForestGame.Core.GameObjects;
+global using ForestGame.Core.GameObjects.Settings;
 global using ForestGame.Core.Interfaces.Common;
 global using ForestGame.Core.Interfaces.Engines;
 global using ForestGame.Core.Interfaces.GameObjects;

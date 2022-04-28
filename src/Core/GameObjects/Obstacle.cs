@@ -2,13 +2,11 @@
 
 internal class Obstacle : BaseImmovableGameObject
 {
-    public Obstacle(PositionModel currentPosition) : base(currentPosition)
+    public Obstacle(ObstacleSettings obstacleSettings) : base(obstacleSettings.StartPosition)
     {
-        var objects = new List<(string name, string model, ConsoleColor colorObject, ConsoleColor colorBackground)>
-        {
-            ("Stone", "   ", ConsoleColor.White, ConsoleColor.DarkMagenta),
-            ("Tree", "   ", ConsoleColor.White, ConsoleColor.DarkMagenta)
-        };
-        (Name, Model, ColorObject, ColorBackground) = objects[new Random().Next(objects.Count)];
-    }
+        Name = obstacleSettings.Name;
+        Model = obstacleSettings.DisplayedModel;
+        ColorObject = obstacleSettings.ColorObject;
+        ColorBackground = obstacleSettings.ColorBackground;
+    }    
 }

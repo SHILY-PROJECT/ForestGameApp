@@ -2,14 +2,13 @@
 
 internal class Enemy : BaseMovableGameObject, IEnemyGameObject
 {
-    public Enemy(IMovementModule movementModule, PositionModel currentPosition) : base(movementModule, currentPosition)
+    public Enemy(EnemySettings enemySettings, IMovementModule movementModule) : base(movementModule, enemySettings.StartPosition)
     {
-        var objects = new List<(string name, string model, int stepSpeed, ConsoleColor colorObject, ConsoleColor colorBackground)>
-        {
-            ("Wolve", ">-<", new Random().Next(200, 400), ConsoleColor.White, ConsoleColor.DarkRed),
-            ("Bear", "<^>", new Random().Next(400, 600), ConsoleColor.White, ConsoleColor.DarkRed)
-        };
-        (Name, Model, StepSpeedInMilliseconds, ColorObject, ColorBackground) = objects[new Random().Next(objects.Count)];
+        Name = enemySettings.Name;
+        Model = enemySettings.DisplayedModel;
+        StepSpeedInMilliseconds = enemySettings.StepSpeedInMilliseconds;
+        ColorObject = enemySettings.ColorObject;
+        ColorBackground = enemySettings.ColorBackground;
     }
 
     public int StepSpeedInMilliseconds { get; set; }
