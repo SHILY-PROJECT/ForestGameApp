@@ -14,9 +14,9 @@ internal class CollisionHandler : ICollisionHandler
 
     public bool IsCollision(BaseMovableGameObject movableObject, int newWidthPosition, int newHightPosition)
     {
-        if (movableObject is EnemyObject enemyObj)
+        if (movableObject is Enemy enemyObj)
         {
-            if (GameObjects.FirstOrDefault(x => x is PlayerObject && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is PlayerObject)
+            if (GameObjects.FirstOrDefault(x => x is Player && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is Player)
             {
                 GameEnd(false);
             }
@@ -25,19 +25,19 @@ internal class CollisionHandler : ICollisionHandler
                 return true;
             }
         }
-        else if (movableObject is PlayerObject playerObj)
+        else if (movableObject is Player playerObj)
         {
-            if (GameObjects.FirstOrDefault(x => x is EnemyObject && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is EnemyObject)
+            if (GameObjects.FirstOrDefault(x => x is Enemy && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is Enemy)
             {
                 GameEnd(false);
             }
-            else if (GameObjects.FirstOrDefault(x => x is PointObject && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is PointObject obj)
+            else if (GameObjects.FirstOrDefault(x => x is Point && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is Point obj)
             {
                 GameCounter.PointsCounter += obj.Points;
                 if (GameCounter.PointsIsEqual) GameEnd(true);
                 obj.IsVisible = false;
             }
-            else if (GameObjects.FirstOrDefault(x => x is ObstacleObject && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is ObstacleObject)
+            else if (GameObjects.FirstOrDefault(x => x is Obstacle && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is Obstacle)
             {
                 return true;
             }

@@ -54,5 +54,4 @@ internal class MovementModule : IMovementModule
             currentPosition.Width -= 1;
         }
     }
-
 }

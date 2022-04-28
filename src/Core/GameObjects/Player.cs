@@ -1,13 +1,13 @@
-﻿namespace ForestGame.Core.GameComponents.Objs;
+﻿namespace ForestGame.Core.GameObjects;
 
-internal class PlayerObject : BaseMovableGameObject
+internal class Player : BaseMovableGameObject
 {
-    public PlayerObject(IPlayerSettings settings) : base(settings.StartPosition)
+    public Player(PlayerSettings settings) : base(settings.StartPosition)
     {
         Initialize(settings);
     }
 
-    public PlayerObject(IMovementModule movementModule, IPlayerSettings settings) : base(movementModule, settings.StartPosition)
+    public Player(IMovementModule movementModule, PlayerSettings settings) : base(movementModule, settings.StartPosition)
     {
         Initialize(settings);
     }
@@ -18,7 +18,7 @@ internal class PlayerObject : BaseMovableGameObject
         => (width < CurrentPosition.Width + 2 || width < CurrentPosition.Width - 2) &&
            (height < CurrentPosition.Height + 2 || height < CurrentPosition.Height - 2);
 
-    private void Initialize(IPlayerSettings settings)
+    private void Initialize(PlayerSettings settings)
     {
         if (settings.Name.All(x => char.IsLetter(x)))
         {

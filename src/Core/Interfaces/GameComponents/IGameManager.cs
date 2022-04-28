@@ -2,7 +2,7 @@
 
 internal interface IGameManager
 {
-    PlayerObject Player { get; set; }
+    Player Player { get; set; }
     IGameGridSize GameGridSize { get; set; }
     IGameCounter GameCounter { get; set; }
     ICollisionHandler CollisionHandler { get; }

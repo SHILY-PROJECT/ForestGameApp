@@ -12,7 +12,7 @@ internal class WorldEngine : IWorldEngine
 
     private EnemyBehaviorHandler EnemyBehaviorHandler { get; set; }
     private IGameGridSize GridSize { get => _manager.GameGridSize; }
-    private PlayerObject Player { get => _manager.Player; }
+    private Player Player { get => _manager.Player; }
     private IList<IGameObject> GameObjects { get => _manager.GameObjectsСollection; }
     private IGameBalance GameObjectsSettings { get => _manager.GameObjectsSettings; }
     private IGameCounter GameCounter { get => _manager.GameCounter; }
@@ -28,7 +28,7 @@ internal class WorldEngine : IWorldEngine
     {
         for (var index = 0; index < GameObjects.Count; index++)
         {
-            if (GameObjects[index] is EnemyObject enemy && enemy.IsTimeToTakeStep)
+            if (GameObjects[index] is Enemy enemy && enemy.IsTimeToTakeStep)
             {
                 EnemyBehaviorHandler.Action(enemy);
             }
@@ -51,14 +51,14 @@ internal class WorldEngine : IWorldEngine
         }
 
         AddGameObject(Player);
-        AddGameObject(typeof(PointObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfPoints), freePositions);
-        AddGameObject(typeof(EnemyObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfEnemies), freePositions);
-        AddGameObject(typeof(ObstacleObject), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfObstacle), freePositions);
+        AddGameObject(typeof(Point), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfPoints), freePositions);
+        AddGameObject(typeof(Enemy), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfEnemies), freePositions);
+        AddGameObject(typeof(Obstacle), CalculateNumberOfObjects(GameObjectsSettings.PercentageOfObstacle), freePositions);
 
-        GameCounter.VictoryPoints = GameObjects.Sum(go => go is PointObject point ? point.Points : 0);
+        GameCounter.VictoryPoints = GameObjects.Sum(go => go is Point point ? point.Points : 0);
     }
 
-    private void AddGameObject(PlayerObject obj)
+    private void AddGameObject(Player obj)
     {
         GameObjects.Add(obj);
     }
@@ -77,9 +77,9 @@ internal class WorldEngine : IWorldEngine
 
     private IGameObject CreateGameObject(Type type, PositionModel position) => type switch
     {
-        _ when type == typeof(EnemyObject)      => new EnemyObject(new MovementModule(GridSize, _manager.CollisionHandler), position),
-        _ when type == typeof(PointObject)      => new PointObject(position),
-        _ when type == typeof(ObstacleObject)   => new ObstacleObject(position),
+        _ when type == typeof(Enemy)      => new Enemy(new MovementModule(GridSize, _manager.CollisionHandler), position),
+        _ when type == typeof(Point)      => new Point(position),
+        _ when type == typeof(Obstacle)   => new Obstacle(position),
         _                                       => throw new ArgumentException($"Invalid type game object.")
     };
 

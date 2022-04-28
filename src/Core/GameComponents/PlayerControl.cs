@@ -9,7 +9,7 @@ internal class PlayerControl : IPlayerControl
         _manager = gameManager;
     }
 
-    private PlayerObject Player { get => _manager.Player; }
+    private Player Player { get => _manager.Player; }
 
     public void Connect()
     {
@@ -49,5 +49,4 @@ internal class PlayerControl : IPlayerControl
             }
         }
     }
-
 }

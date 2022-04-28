@@ -2,7 +2,7 @@
 
 internal class GameManager : IGameManager
 {
-    public PlayerObject Player { get; set; }
+    public Player Player { get; set; }
     public IGameGridSize GameGridSize { get; set; }
     public IGameCounter GameCounter { get; set; }
     public ICollisionHandler CollisionHandler { get; set; }
@@ -11,7 +11,7 @@ internal class GameManager : IGameManager
     public bool IsGameOver { get; set; }
 
     public GameManager(
-        PlayerObject player,
+        Player player,
         IGameGridSize gameGridSize,
         IGameCounter gameCounter,
         IGameBalance gameObjectsSettings)

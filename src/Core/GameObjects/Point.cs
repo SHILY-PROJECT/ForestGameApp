@@ -1,8 +1,8 @@
-﻿namespace ForestGame.Core.GameComponents.Objs;
+﻿namespace ForestGame.Core.GameObjects;
 
-internal class PointObject : BaseImmovableGameObject
+internal class Point : BaseImmovableGameObject
 {
-    public PointObject(PositionModel currentPosition) : base(currentPosition)
+    public Point(PositionModel currentPosition) : base(currentPosition)
     {
         var objects = new List<(string name, string model, int points, ConsoleColor colorObject, ConsoleColor colorBackground)>()
         {

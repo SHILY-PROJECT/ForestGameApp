@@ -1,4 +1,4 @@
-﻿namespace ForestGame.Core.GameComponents.Models;
+﻿namespace ForestGame.Core.GameComponents;
 
 internal class PositionModel
 {

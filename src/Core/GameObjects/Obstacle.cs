@@ -1,8 +1,8 @@
-﻿namespace ForestGame.Core.GameComponents.Objs;
+﻿namespace ForestGame.Core.GameObjects;
 
-internal class ObstacleObject : BaseImmovableGameObject
+internal class Obstacle : BaseImmovableGameObject
 {
-    public ObstacleObject(PositionModel currentPosition) : base(currentPosition)
+    public Obstacle(PositionModel currentPosition) : base(currentPosition)
     {
         var objects = new List<(string name, string model, ConsoleColor colorObject, ConsoleColor colorBackground)>
         {

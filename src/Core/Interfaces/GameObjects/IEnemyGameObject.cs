@@ -1,4 +1,4 @@
-﻿namespace ForestGame.Core.Interfaces.GameComponents.Objs;
+﻿namespace ForestGame.Core.Interfaces.GameObjects;
 
 internal interface IEnemyGameObject : IMoveController
 {

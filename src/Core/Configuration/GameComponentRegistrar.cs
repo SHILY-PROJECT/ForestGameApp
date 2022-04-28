@@ -8,8 +8,8 @@ internal static class GameComponentRegistrar
 
         services
             .AddSingleton<Startup>()
-            .AddSingleton<PlayerObject>()
-            .AddSingleton<IPlayerSettings, PlayerSettings>(s => GetPlayerSettings())
+            .AddSingleton<Player>()
+            .AddSingleton<PlayerSettings>(s => GetPlayerSettings())
             .AddSingleton<IGameBalance, GameBalance>()
             .AddSingleton<IGameGridSize, GameGridSize>(s => GetGridSize())
             .AddSingleton<IGameCounter, GameCounter>()

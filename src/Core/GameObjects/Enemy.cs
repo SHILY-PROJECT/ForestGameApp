@@ -1,8 +1,8 @@
-﻿namespace ForestGame.Core.GameComponents.Objs;
+﻿namespace ForestGame.Core.GameObjects;
 
-internal class EnemyObject : BaseMovableGameObject, IEnemyGameObject
+internal class Enemy : BaseMovableGameObject, IEnemyGameObject
 {
-    public EnemyObject(IMovementModule movementModule, PositionModel currentPosition) : base(movementModule, currentPosition)
+    public Enemy(IMovementModule movementModule, PositionModel currentPosition) : base(movementModule, currentPosition)
     {
         var objects = new List<(string name, string model, int stepSpeed, ConsoleColor colorObject, ConsoleColor colorBackground)>
         {
@@ -20,7 +20,7 @@ internal class EnemyObject : BaseMovableGameObject, IEnemyGameObject
     {
         var currentTime = TimeSpan.FromSeconds(IGameManager.CurrentTime);
 
-        if ((currentTime.TotalMilliseconds - LastStep.TotalMilliseconds) < StepSpeedInMilliseconds) return false;
+        if (currentTime.TotalMilliseconds - LastStep.TotalMilliseconds < StepSpeedInMilliseconds) return false;
 
         LastStep = currentTime;
         return true;

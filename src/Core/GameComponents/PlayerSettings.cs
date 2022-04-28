@@ -1,6 +1,6 @@
-﻿namespace ForestGame.Core.GameComponents.Models;
+﻿namespace ForestGame.Core.GameComponents;
 
-internal class PlayerSettings : IPlayerSettings
+internal class PlayerSettings
 {
     public string Name { get; set; }
     public string DisplayedModel { get; set; }

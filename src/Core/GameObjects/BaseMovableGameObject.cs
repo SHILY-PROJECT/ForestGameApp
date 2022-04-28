@@ -1,4 +1,4 @@
-﻿namespace ForestGame.Core.GameComponents.Objs;
+﻿namespace ForestGame.Core.GameObjects;
 
 internal abstract class BaseMovableGameObject : BaseGameObject, IMoveController
 {
