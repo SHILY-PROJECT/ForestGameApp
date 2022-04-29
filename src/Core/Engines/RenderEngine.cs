@@ -45,7 +45,7 @@ internal class RenderEngine : IRenderEngine
     {
         RenderPointsCounter();
 
-        for (int index = 0; index < GameObjects.Count; index++)
+        for (var index = 0; index < GameObjects.Count; index++)
         {
             RenderGameObject(GameObjects[index]);
         }
@@ -55,28 +55,24 @@ internal class RenderEngine : IRenderEngine
     {
         var buffer = new StringBuilder();
 
-        var sizeWidth = (GridSize.Width + 1);
-        var sizeHeight = (GridSize.Height * 2 + 1);
+        var widthSize = (GridSize.Width + 1);
+        var heightSize = (GridSize.Height * 2 + 1);
 
-        for (int indexHeight = 0; indexHeight < sizeHeight; indexHeight++)
+        for (var heightIndex = 0; heightIndex < heightSize; heightIndex++)
         {
-            for (int indexWidth = 0; indexWidth < sizeWidth; indexWidth++)
+            for (var widthIndex = 0; widthIndex < widthSize; widthIndex++)
             {
-                if (indexHeight == 0)
+                if (heightIndex == 0)
                 {
-                    AppendToBuffer(buffer, ("╔═══", "╤═══", "╗"), (indexWidth, sizeWidth));
+                    AppendToBuffer(buffer, ("╔═══", "════", "╗"), (widthIndex, widthSize));
                 }
-                else if ((indexHeight + 1) == sizeHeight)
+                else if ((heightIndex + 1) == heightSize)
                 {
-                    AppendToBuffer(buffer, ("╚═══", "╧═══", "╝"), (indexWidth, sizeWidth));
-                }
-                else if ((indexHeight + 1) % 2 == 0)
-                {
-                    AppendToBuffer(buffer, ("║   ", "│   ", "║"), (indexWidth, sizeWidth));
+                    AppendToBuffer(buffer, ("╚═══", "════", "╝"), (widthIndex, widthSize));
                 }
                 else
                 {
-                    AppendToBuffer(buffer, ("╟───", "┼───", "╢"), (indexWidth, sizeWidth));
+                    AppendToBuffer(buffer, ("║   ", "    ", "║"), (widthIndex, widthSize));
                 }
             }
             buffer.AppendLine();
@@ -147,5 +143,4 @@ internal class RenderEngine : IRenderEngine
             RenderGameObject(GameCounter.CurrentLevel.ToString(), _counterWidth + 26, _counterHight + 1, ConsoleColor.White, default);
         }
     }
-
 }

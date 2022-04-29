@@ -7,20 +7,20 @@ internal class WorldEngine : IWorldEngine
     private readonly EnemySettings[] _enemies =
     {
         new("Wolve", ">-<", ConsoleColor.White, ConsoleColor.DarkRed, _rnd.Next(200, 400)),
-        new("Bear", "<^>", ConsoleColor.White, ConsoleColor.DarkRed, _rnd.Next(400, 600))
+        new("Bear", ">-<", ConsoleColor.White, ConsoleColor.DarkYellow, _rnd.Next(400, 600))
     };
 
     private readonly ObstacleSettings[] _obstacles =
     {
-        new("Stone", "   ", ConsoleColor.White, ConsoleColor.DarkMagenta),
-        new("Tree", "   ", ConsoleColor.White, ConsoleColor.DarkMagenta)
+        new("Stone", "   ", ConsoleColor.White, ConsoleColor.White),
+        new("Tree", "   ", ConsoleColor.White, ConsoleColor.White)
     };
 
     private readonly PointSettings[] _points =
     {
-        new("Apples", "-$-", ConsoleColor.White, ConsoleColor.DarkGreen, 1),
-        new("Cherries", "-$-", ConsoleColor.White, ConsoleColor.DarkGreen, 1),
-        new("Bananas", "-$-", ConsoleColor.White, ConsoleColor.DarkGreen, 1)
+        new("Apples", " $ ", ConsoleColor.White, ConsoleColor.DarkGreen, 1),
+        new("Cherries", " $ ", ConsoleColor.White, ConsoleColor.DarkGreen, 1),
+        new("Bananas", " $ ", ConsoleColor.White, ConsoleColor.DarkGreen, 1)
     };
 
     private readonly IGameManager _manager;
@@ -59,9 +59,9 @@ internal class WorldEngine : IWorldEngine
     {
         var freePositions = new List<PositionModel>();
 
-        for (int heightIndex = 0; heightIndex < GridSize.Height; heightIndex++)
+        for (var heightIndex = 0; heightIndex < GridSize.Height; heightIndex++)
         {
-            for (int widthIndex = 0; widthIndex < GridSize.Width; widthIndex++)
+            for (var widthIndex = 0; widthIndex < GridSize.Width; widthIndex++)
             {
                 if (!Player.IsCoordinatesInPlayerPositionOrAbout(widthIndex, heightIndex))
                 {
@@ -78,9 +78,9 @@ internal class WorldEngine : IWorldEngine
         GameCounter.VictoryPoints = GameObjects.Sum(go => go is Point point ? point.Points : 0);
     }
 
-    private void AddGameObject(Player obj)
+    private void AddGameObject(Player player)
     {
-        GameObjects.Add(obj);
+        GameObjects.Add(player);
     }
 
     private void AddGameObject(Type typeGameObject, int numberOfObjects, IList<PositionModel> listFreePositions)
@@ -100,7 +100,7 @@ internal class WorldEngine : IWorldEngine
         _ when type == typeof(Enemy)      => new Enemy(_enemies[_rnd.Next(_enemies.Length)] with { StartPosition = position }, new MovementModule(GridSize, _manager.CollisionHandler)),
         _ when type == typeof(Point)      => new Point(_points[_rnd.Next(_points.Length)] with { StartPosition = position }),
         _ when type == typeof(Obstacle)   => new Obstacle(_obstacles[_rnd.Next(_obstacles.Length)] with { StartPosition = position }),
-        _                                       => throw new ArgumentException($"Invalid type game object.")
+        _                                 => throw new ArgumentException($"Invalid type game object.")
     };
 
     private int CalculateNumberOfObjects(int percentageOfObjects)
