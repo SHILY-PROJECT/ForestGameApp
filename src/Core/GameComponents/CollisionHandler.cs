@@ -18,7 +18,7 @@ internal class CollisionHandler : ICollisionHandler
         {
             if (GameObjects.FirstOrDefault(x => x is Player && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is Player)
             {
-                GameEnd(false);
+                throw new OperationCanceledException("bad");
             }
             else if (GameObjects.FirstOrDefault(x => !ReferenceEquals(x, movableObject) && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is not null)
             {
@@ -29,12 +29,12 @@ internal class CollisionHandler : ICollisionHandler
         {
             if (GameObjects.FirstOrDefault(x => x is Enemy && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is Enemy)
             {
-                GameEnd(false);
+                throw new OperationCanceledException("bad");
             }
             else if (GameObjects.FirstOrDefault(x => x is Point && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is Point obj)
             {
                 GameCounter.PointsCounter += obj.Points;
-                if (GameCounter.PointsIsEqual) GameEnd(true);
+                if (GameCounter.PointsIsEqual) throw new OperationCanceledException("good");
                 obj.IsVisible = false;
             }
             else if (GameObjects.FirstOrDefault(x => x is Obstacle && x.IsCurrentPosition(newWidthPosition, newHightPosition)) is Obstacle)
@@ -44,41 +44,4 @@ internal class CollisionHandler : ICollisionHandler
         }
         return false;
     }
-
-    private Task GameEnd(bool goodOrBad)
-    {
-        _manager.IsGameOver = true;
-        Task.Delay(100).Wait();
-        Console.Clear();
-
-        if (goodOrBad)
-        {
-            Print("< GOOD GAME >", ConsoleColor.DarkGreen);
-        }
-        else
-        {
-            Print("< GAME OVER >", ConsoleColor.DarkRed);
-        }
-
-        Print($"LEVEL REACHED: {GameCounter.CurrentLevel}", ConsoleColor.DarkBlue);
-        Print($"POINTS EARNED: {GameCounter.PointsCounter}", ConsoleColor.DarkBlue);
-
-        while (true)
-        {
-            Console.WriteLine($"\nPress to exit 'Escape' or 'Enter'...");
-
-            switch (Console.ReadKey(true).Key)
-            {
-                case ConsoleKey.Escape or ConsoleKey.Enter: Environment.Exit(0); break;
-            }
-        }
-    }
-
-    private static void Print(string text, ConsoleColor color)
-    {
-        Console.BackgroundColor = color;
-        Console.WriteLine(text);
-        Console.ResetColor();
-    }
-
 }
