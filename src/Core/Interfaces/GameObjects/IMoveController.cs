@@ -2,7 +2,7 @@
 
 internal interface IMoveController
 {
-    IMovementModule MovementModule { get; set; }
+    IMovementModule? MovementModule { get; set; }
 
     void MoveUp();
     void MoveDown();

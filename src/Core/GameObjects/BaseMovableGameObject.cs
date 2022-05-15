@@ -13,9 +13,9 @@ internal abstract class BaseMovableGameObject : BaseGameObject, IMoveController
         MovementModule = movementModule;
     }
 
-    public IMovementModule MovementModule { get; set; }
+    public IMovementModule? MovementModule { get; set; }
     public PositionModel PastPosition { get; set; }
-    public bool CurrentAndPastPositionIsEqual => CurrentPosition.Width == PastPosition.Width && CurrentPosition.Height == PastPosition.Height;
+    public bool CurrentAndPastPositionIsEqual => CurrentPosition?.Width == PastPosition.Width && CurrentPosition.Height == PastPosition.Height;
 
     public void SetMoveModule(IMovementModule movementModule)
     {
@@ -37,8 +37,8 @@ internal abstract class BaseMovableGameObject : BaseGameObject, IMoveController
         else PastPosition = new PositionModel(width, hight);
     }
 
-    public void MoveUp() => MovementModule.Up(this);
-    public void MoveDown() => MovementModule.Down(this);
-    public void MoveRight() => MovementModule.Right(this);
-    public void MoveLeft() => MovementModule.Left(this);
+    public void MoveUp() => MovementModule?.Up(this);
+    public void MoveDown() => MovementModule?.Down(this);
+    public void MoveRight() => MovementModule?.Right(this);
+    public void MoveLeft() => MovementModule?.Left(this);
 }

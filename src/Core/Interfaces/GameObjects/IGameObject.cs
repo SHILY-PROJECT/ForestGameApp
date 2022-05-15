@@ -6,7 +6,7 @@ internal interface IGameObject
     string Model { get; set; }
     ConsoleColor ColorBackground { get; set; }
     ConsoleColor ColorObject { get; set; }
-    PositionModel CurrentPosition { get; set; }
+    PositionModel? CurrentPosition { get; set; }
     bool IsVisible { get; set; }
 
     void SetCurrentPosition(int width, int hight);

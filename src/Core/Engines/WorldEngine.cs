@@ -39,7 +39,7 @@ internal class WorldEngine : IWorldEngine
 
     public void Connect()
     {
-        (_manager.GameObjectsSettings as GameBalance).SetValues(_rnd.Next(6, 8), _rnd.Next(5, 7), _rnd.Next(3, 5));
+        (_manager.GameObjectsSettings as GameBalance)?.SetValues(_rnd.Next(6, 8), _rnd.Next(5, 7), _rnd.Next(3, 5));
         EnemyBehaviorHandler = new EnemyBehaviorHandler(_manager);
         GenerateWorld();
     }

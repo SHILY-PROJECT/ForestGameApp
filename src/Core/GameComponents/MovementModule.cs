@@ -15,7 +15,7 @@ internal class MovementModule : IMovementModule
     {
         var currentPosition = movableObj.CurrentPosition;
 
-        if (currentPosition.Height < _gridSize.Height && currentPosition.Height > 0 &&
+        if (currentPosition?.Height < _gridSize.Height && currentPosition.Height > 0 &&
             _collisionHandler.IsCollision(movableObj, currentPosition.Width, currentPosition.Height - 1) is false)
         {
             currentPosition.Height -= 1;
@@ -26,7 +26,7 @@ internal class MovementModule : IMovementModule
     {
         var currentPosition = movableObj.CurrentPosition;
 
-        if (currentPosition.Height < _gridSize.Height - 1 &&
+        if (currentPosition?.Height < _gridSize.Height - 1 &&
             _collisionHandler.IsCollision(movableObj, currentPosition.Width, currentPosition.Height + 1) is false)
         {
             currentPosition.Height += 1;
@@ -37,7 +37,7 @@ internal class MovementModule : IMovementModule
     {
         var currentPosition = movableObj.CurrentPosition;
 
-        if (currentPosition.Width < _gridSize.Width - 1 &&
+        if (currentPosition?.Width < _gridSize.Width - 1 &&
             _collisionHandler.IsCollision(movableObj, currentPosition.Width + 1, currentPosition.Height) is false)
         {
             currentPosition.Width += 1;
@@ -48,7 +48,7 @@ internal class MovementModule : IMovementModule
     {
         var currentPosition = movableObj.CurrentPosition;
 
-        if (currentPosition.Width < _gridSize.Width && currentPosition.Width > 0 &&
+        if (currentPosition?.Width < _gridSize.Width && currentPosition.Width > 0 &&
             _collisionHandler.IsCollision(movableObj, currentPosition.Width - 1, currentPosition.Height) is false)
         {
             currentPosition.Width -= 1;
